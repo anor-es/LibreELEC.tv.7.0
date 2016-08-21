@@ -8,8 +8,8 @@
   GREETING0="##############################################"
   GREETING1="#                 LibreELEC                  #"
   GREETING2="#            http://libreelec.tv             #"
-  GREETING3="##############################################"
-  GREETING4=""
+  GREETING3="# v3   Changelog: http://goo.gl/64pvw6       #"
+  GREETING4="##############################################"
 
 # Root password to integrate in the target system
   ROOT_PASSWORD="le"
