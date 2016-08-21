@@ -805,6 +805,16 @@
     fi
 
     [ -f "/sysroot/usr/lib/systemd/systemd" ] || error "final_check" "Could not find systemd!"
+    
+    # https://github.com/CvH/LibreELEC.tv/blob/dvb-drivers/packages/sysutils/busybox/scripts/init#L813-L820
+    # mount correct kernel modules dir
+    MODULES_DIR="$(cat /sysroot/storage/downloads/dvb-drivers.txt 2>/dev/null)"
+    if [ -n "$MODULES_DIR" ]; then
+      MODULES_DIR="/sysroot/lib/modules/$MODULES_DIR"
+      if [ -d "$MODULES_DIR" ]; then
+        mount -o loop,ro "$MODULES_DIR" /sysroot/lib/modules/$(uname -r)
+      fi
+    fi
   }
 
   if [ "${boot%%=*}" = "FILE" ]; then
