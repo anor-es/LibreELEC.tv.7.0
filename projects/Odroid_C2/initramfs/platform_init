@@ -62,3 +62,7 @@ echo 1 >  /sys/module/amvdec_h265/parameters/use_cma
 
 #  Turn off the annoying Blue Flashing LED on the C2
 echo none > /sys/class/leds/blue:heartbeat/trigger
+
+# Attempt to fix MPEG-TS stream lost packet (HDMI-CEC irq issue)
+# http://forum.odroid.com/viewtopic.php?p=155840#p155840
+echo 2 > /proc/irq/231/smp_affinity
