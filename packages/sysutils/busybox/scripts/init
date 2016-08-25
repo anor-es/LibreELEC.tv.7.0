@@ -808,11 +808,13 @@
     
     # https://github.com/CvH/LibreELEC.tv/blob/dvb-drivers/packages/sysutils/busybox/scripts/init#L813-L820
     # mount correct kernel modules dir
-    MODULES_DIR="$(cat /sysroot/storage/downloads/dvb-drivers.txt 2>/dev/null)"
-    if [ -n "$MODULES_DIR" ]; then
-      MODULES_DIR="/sysroot/lib/modules/$MODULES_DIR"
-      if [ -d "$MODULES_DIR" ]; then
+    MOUNT_DIR="$(cat /sysroot/storage/downloads/dvb-drivers.txt 2>/dev/null)"
+    if [ -n "$MOUNT_DIR" ]; then
+      MODULES_DIR="/sysroot/lib/modules/$MOUNT_DIR"
+      FIRMWARE_DIR="/sysroot/lib/firmware-$MOUNT_DIR"
+      if [ -d "$MODULES_DIR" ] && [ -d "$FIRMWARE_DIR" ]; then
         mount -o loop,ro "$MODULES_DIR" /sysroot/lib/modules/$(uname -r)
+        mount -o loop,ro "$FIRMWARE_DIR" /sysroot/lib/firmware
       fi
     fi
   }
